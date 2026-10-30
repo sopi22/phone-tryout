@@ -146,7 +146,7 @@ WHAT WOULD CHANGE MY MIND (stated in advance):
 ## 4. OPERATOR CONTEXT (Section 1)
 
 Researcher / sole author for attribution purposes: Jhoana Sophia Munar
-  (jhosophie@proton.me, GitHub account "sopi22").
+  (GitHub account "sopi22").
 Project sponsor/operator setting this up: her parent (Trozovka / John
   Winsome Munar), doing the setup work on her behalf.
 Comfort level with coding/git/dev tooling: not stated by either operator —
@@ -668,7 +668,7 @@ FACT (2026-08-14) -- resolved by direct device query, not a second
   self-reported state, prefer direct observation). Paired and
   connected to the A54 over adb; confirmed by build fingerprint
   (samsung/a54xnsxx/a54x:16/BP4A.251205.006/A546EXXSLFZG3, serial
-  R5CW41TXWJB) to be model SM-A546E. `adb shell
+  R5CW41XXXXX) to be model SM-A546E. `adb shell
   getprop ro.build.version.security_patch` on the A54 also reads
   2026-07-05 -- the same value as the A53, not a different one. This
   rules out the "dates read off the wrong phone" hypothesis: both
@@ -687,7 +687,7 @@ DECISION (2026-08-14) -- 2026-07-05 is the confirmed, adb-verified
   settle this -- the recheck below already ran and its result is
   unaffected either way.
 
-RE-CHECK (2026-08-14, device 10.161.62.188:38927):
+RE-CHECK (2026-08-14, device 192.168.x.x:38927):
   storage_write: OBSERVATION=PASS, COMPARISON=UNCHANGED -- write+read-back matched
   settings_persist: OBSERVATION=PASS, COMPARISON=UNCHANGED -- put+get matched
 
@@ -700,7 +700,7 @@ FACT (2026-08-14) -- both probes returned PASS, COMPARISON=UNCHANGED
   session -- the part of H1 ("comparable over time") that R0-R4 could
   not test on their own.
 
-  A54 (model SM-A546E, serial R5CW41TXWJB, not previously used for
+  A54 (model SM-A546E, serial R5CW41XXXXX, not previously used for
   Pulse testing): security patch confirmed via adb as 2026-07-05 (see
   above). Logged here as a known fact only -- no probes have been run
   against it. Per the standing R3/R4 finding, it remains a same-OEM

@@ -26,7 +26,7 @@ manage pairing/connecting itself.
     pulse-run --serial <serial-as-shown-by-adb-devices>
 
     # example:
-    pulse-run --serial 10.161.62.188:40139
+    pulse-run --serial 192.168.1.50:5555
 
 Each run prints one JSON line per probe result and appends to
 pulse_history.json (in the current directory by default; override with
@@ -44,7 +44,7 @@ background process:
     pulse-recheck --serial <serial-as-shown-by-adb-devices>
 
     # example:
-    pulse-recheck --serial 10.161.62.188:40139
+    pulse-recheck --serial 192.168.1.50:5555
 
 This does everything `pulse-run` does (same two probes, same
 pulse_history.json, same NEW/UNCHANGED/CHANGED/NO_COMPARISON logic)

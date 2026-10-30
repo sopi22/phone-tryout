@@ -25,7 +25,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--serial",
         required=True,
-        help="Device serial as shown by `adb devices` (e.g. 10.161.62.188:40139).",
+        help="Device serial as shown by `adb devices` (e.g. 192.168.1.50:5555).",
     )
     parser.add_argument(
         "--history",

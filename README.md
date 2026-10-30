@@ -56,4 +56,4 @@ Short version:
     pulse-run --serial <serial-from-adb-devices>   # run the probes
 
 ## AUTHOR
-Jhoana Sophia Munar (jhosophie@proton.me)
+Jhoana Sophia Munar (GitHub: [@sopi22](https://github.com/sopi22))
