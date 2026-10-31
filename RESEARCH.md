@@ -1,4 +1,12 @@
 PULSE EXPERIMENT 001 — RESEARCH LOG
+
+> **In plain words:** this is my lab notebook for phone-tryout (first called "Pulse"). The
+> question: does actually trying something on a phone (writing a file, saving a setting) tell
+> you more than the phone's own system info? I wrote down beforehand what would count as yes
+> or no, then ran both tryouts, including deliberate failures, on a Samsung A53, a Pixel
+> emulator and a Samsung A54. Result: yes for these two tryouts. Still open: a non-Samsung
+> physical phone. "Hypothesis" = what I expected; "falsification" = my attempt to prove myself wrong.
+
 Phase: 1 (implementation + first live run) complete. Probe selection was
 confirmed by the operator on 2026-08-13; see Section 8 for the
 falsification report from the actual runs against the connected device.
