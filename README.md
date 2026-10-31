@@ -1,59 +1,70 @@
-# PULSE — Experiment 001
+# phone-tryout
 
-## RESEARCH QUESTION
-Can a meaningful subset of software/environment compatibility failures be
-represented as explicit, falsifiable operating assumptions whose state is
-observable through safe behavioral probes and compared over time — in a
-way that tells you something conventional environment metadata (getprop,
-dumpsys, pm) does not already tell you?
+**Tries things out on a real Android phone instead of trusting what the phone reports.**
 
-## HYPOTHESIS
-H1 (research hypothesis): yes — a meaningful subset can be represented and
-  observed this way.
-H0 (null hypothesis): no — behavioral probing adds nothing materially
-  useful beyond conventional metadata for the failures tested.
+Apps often break on some phones even when the phone's own system info (`getprop`,
+`dumpsys`, `pm`) says everything should work. phone-tryout runs small, safe test actions on
+a connected phone and records whether they **actually** worked, so you can compare phones,
+and the same phone before and after an update.
 
-A result supporting H0 is a complete, successful experiment, not a failed
-one. See RESEARCH.md for the full falsification criteria, baseline
-methodology, and what would change my mind (stated in advance).
+v1 has two tryouts:
 
-## NON-GOALS
-This is explicitly NOT: a signing/PKI system, a reproducible-build
-verifier, a dependency-risk scorer, a source archival tool, a
-permission manager, an app store, a capability/provider abstraction, a
-cost model, a daemon, a network service, or a background process. If any
-of these appears to be needed, that is a stop-and-flag condition, not
-something to build.
+| Tryout | What it actually does |
+|---|---|
+| **Storage write** | Writes one small test file (`/sdcard/pulse_probe_test`) over adb, reads it back, deletes it |
+| **Setting survives** | Saves one test value (`pulse_probe_test_key`) in Android's settings over adb and reads it back |
 
-## CURRENT PHASE
-Phase 1 CLOSED — both confirmed probes are implemented and have been
-reproduced across four sessions (R4) and three device identities: a real
-Samsung Galaxy A53 (Android 16/API 36, R1/R2), a Google emulator (AVD,
-Android 14/API 34, R3), and a real Samsung Galaxy A54 (Android 16/API 36,
-R4), including both probes' deliberate FAIL-detection cases on all three.
-See RESEARCH.md Section 8 for the falsification report; conclusion is
-SUPPORTED, with a named residual limitation — no run has yet used a
-second vendor's shipped OEM skin on physical hardware (the emulator is a
-reference "google_apis" image, and R4's A54 is a second Samsung model,
-same OEM as R1/R2 — it added evidence but did not close this gap).
+Each run is saved, so the next run can tell you whether a result is **NEW**, **UNCHANGED**
+or **CHANGED** compared with last time.
 
-That limitation is logged as an OPEN, NOT-SCHEDULED item — a second
-Android device that is both a different OEM *and* a physical device
-(not a reference-image emulator, and not another Samsung model) would
-close it, but none is available right now, it is not being actively
-sourced, and it is not required for Experiment 001 to be considered
-complete. See RESEARCH.md Section 8's recommended next experiment for
-the exact status. No other items are
-pending on this phase.
+## Why I built it
 
-## SETUP / RUN
-See pulse/README.md for exact, copy-pasteable setup and run commands.
-Short version:
-    cd pulse
-    python3 -m venv .venv && source .venv/bin/activate
-    pip install -e ".[dev]"
-    pytest                                    # run the test suite
-    pulse-run --serial <serial-from-adb-devices>   # run the probes
+I wanted to know if "just try it" tells you anything that the phone's system info doesn't.
+I wrote down beforehand what would count as yes or no, including deliberately making each
+tryout fail to check that a failure really shows up as a failure.
 
-## AUTHOR
-Jhoana Sophia Munar (GitHub: [@sopi22](https://github.com/sopi22))
+**Result: yes, for these two tryouts.** Repeated over four sessions on three devices: a
+Samsung Galaxy A53 (Android 16), a Google Pixel emulator (Android 14) and a Samsung Galaxy
+A54 (Android 16), including the deliberate failure cases on all three.
+
+**Still open, not urgent:** testing on a physical phone from a *different maker* (not
+Samsung, not an emulator). The A54 helped but is the same brand as the A53.
+
+## Run it
+
+Requires Python 3.10+ and `adb` (Android platform tools) on your PATH, with a phone already
+connected (`adb devices` lists it).
+
+```bash
+git clone https://github.com/sopi22/phone-tryout.git
+cd phone-tryout/pulse
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+
+pytest                                          # tests (phone tests skip if none connected)
+pulse-run --serial <serial-from-adb-devices>    # run both tryouts once
+pulse-recheck --serial <serial>                 # run again later and log the comparison
+```
+
+The internal package is still called `pulse` (the project's original name).
+
+## Privacy
+
+The tryouts only touch their own test file and their own test setting key. Nothing else on the phone is
+read: no photos, contacts, messages or other apps' data, and nothing is sent anywhere.
+
+## What it is not
+
+Not an app store, not a permission manager, not a background service. Nothing runs unless
+you start it.
+
+The full lab notebook (every session, what I expected, what happened) is in
+[RESEARCH.md](RESEARCH.md).
+
+## Author
+
+Jhoana Sophia Munar ([@sopi22](https://github.com/sopi22))
+
+## License
+
+MIT, see [LICENSE](LICENSE).

@@ -1,7 +1,7 @@
 [project]
 name = "pulse"
 version = "0.1.0"
-description = "Pulse Experiment 001 -- behavioral compatibility-assumption probes over adb"
+description = "Tries things out on a real Android phone over adb instead of trusting what the phone reports"
 requires-python = ">=3.10"
 dependencies = []
 

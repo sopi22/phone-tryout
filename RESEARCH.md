@@ -33,7 +33,7 @@ A: As specified in the brief (Minimum Implementation section) — carried
        must be justified in writing before use.
 
 Q: Repo name, public or private?
-A: DECISION — repo name `foss-escape-architecture` (as specified in the
+A: DECISION — repo name `phone-tryout` (as specified in the
    brief's repo scope). Visibility: PUBLIC, per the template's stated
    default ("Default public unless a graded-course or privacy concern
    applies"). No graded-course constraint or privacy objection was stated
